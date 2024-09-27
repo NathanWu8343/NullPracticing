@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "NullPracticing": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}
