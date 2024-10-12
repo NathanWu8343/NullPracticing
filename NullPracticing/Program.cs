@@ -1,4 +1,4 @@
-﻿namespace NullPracticing
+namespace NullPracticing
 {
     internal class Program
     {
@@ -21,10 +21,10 @@
             Console.WriteLine($"| {GetBookLabel(b2)} |"); // handle null
             Console.WriteLine($"| {GetBookLabel(b3)} |"); // handle null
 
-            Console.WriteLine($"{b2.Author.LastName}"); // handle null
+            Console.WriteLine($"{b2?.Author?.LastName ?? DefaultName}"); // handle null
 
             var books = new[] { b1, b2, b3 };
-            Console.WriteLine(string.Join("|", books.Select(x => x.Author.LastName))); // handle null
+            Console.WriteLine(string.Join("|", books.Select(x => x?.Author?.LastName ?? DefaultName))); // handle null
 
             Console.ReadLine();
 
@@ -36,8 +36,10 @@
             }
         }
 
-        private static string GetLabel(Person person)
+        private static string GetLabel(Person? person)
         {
+            if (person is null) return DefaultName;
+
             string name = person.LastName is null
                 ? person.FirstName
                 : $"{person.FirstName} {person.LastName}";
