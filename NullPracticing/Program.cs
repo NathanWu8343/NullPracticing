@@ -2,6 +2,8 @@
 {
     internal class Program
     {
+        private static readonly string DefaultName = "Unknown";
+
         private static void Main(string[] args)
         {
             Person? p1 = Person.Create("John", "Doe");
@@ -22,14 +24,16 @@
             Console.WriteLine($"{b2.Author.LastName}"); // handle null
 
             var books = new[] { b1, b2, b3 };
-            Console.WriteLine(books.Select(x => x.Author.LastName)); // handle null
+            Console.WriteLine(string.Join("|", books.Select(x => x.Author.LastName))); // handle null
 
             Console.ReadLine();
 
             static string GetBookLabel(Book book)
-                => GetLabel(book.Author) is string author
-                    ? $"{book.Title} by {author}"
-                    : book.Title;
+            {
+                return GetLabel(book.Author) is string author
+                       ? $"{book.Title} by {author}"
+                       : book.Title;
+            }
         }
 
         private static string GetLabel(Person person)
